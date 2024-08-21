@@ -14,7 +14,7 @@ def run_host(command, env={}, disown=True):
     try:
         output = execute_ssh_command(
             client,
-            f'. {settings.settings.ssh_settings.bash_profile_script}; cd "$BITCART_BASE_DIRECTORY"; {env_vars} nohup'
+            f'. {settings.settings.ssh_settings.bash_profile_script}; cd "$RDWV_BASE_DIRECTORY"; {env_vars} nohup'
             f" {prepare_shell_command(command)}" + (" > /dev/null 2>&1 & disown" if disown else ""),
         )
         if not disown:  # pragma: no cover

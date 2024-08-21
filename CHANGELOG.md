@@ -248,7 +248,7 @@ The store POS has gained basic quantity management: when a product is bought, it
 
 ### Allow running on bare ip
 
-It is now possible to easily run without a domain, just set `BITCART_HOST` to server ip address and it will just work!
+It is now possible to easily run without a domain, just set `RDWV_HOST` to server ip address and it will just work!
 
 ### Allow running staging updates
 
@@ -256,7 +256,7 @@ In case you want to test a new feature, you can enable new setting in store poli
 
 ### DNS lookup in the configurator
 
-The configurator now checks if `BITCART_HOST` specified actually has any DNS records configured. If it doesn't, it warns the user that the installation will likely fail
+The configurator now checks if `RDWV_HOST` specified actually has any DNS records configured. If it doesn't, it warns the user that the installation will likely fail
 
 ### Lunanode configurator shut down
 
@@ -280,7 +280,7 @@ A new endpoint POST `/invoices/order_id/{order_id}` was added. It gets a pending
 - Less verbose logging for backups
 - Allow configuring debug setting for daemons via `COIN_DEBUG`
 - Improve reliability of backup script
-- Allow running older version via `BITCART_VERSION` in docker deployment
+- Allow running older version via `RDWV_VERSION` in docker deployment
 - Save plugins data in backups
 
 ## 0.7.0.1
@@ -475,7 +475,7 @@ rdwv-cli help payto
 ### Misc changes
 
 - Fixes for tor support in onedomain mode
-- Added new settings for admin and store to allow integration to Citadel: `BITCART_ADMIN_ONION_API_URL` and `BITCART_ADMIN_ONION_HOST`. This allows skipping reading the hostname file and using env var as a source of tor hostname
+- Added new settings for admin and store to allow integration to Citadel: `RDWV_ADMIN_ONION_API_URL` and `RDWV_ADMIN_ONION_HOST`. This allows skipping reading the hostname file and using env var as a source of tor hostname
 
 ## 0.6.9.0
 
@@ -1151,7 +1151,7 @@ On first startup, it generates an SSH key, and adds it to the list of trusted ke
 
 That way, it can connect to the host via ssh, which is a way better way of executing commands, which opens doors to new possibilities.
 
-Note: SSH support is only enabled when `BITCART_ENABLE_SSH` is set to `true`, by default it is so.
+Note: SSH support is only enabled when `RDWV_ENABLE_SSH` is set to `true`, by default it is so.
 
 Note: SSH support requires an ssh server (`openssh-server`/`sshd`) to be running on the host machine.
 
@@ -1219,7 +1219,7 @@ New scripts:
 
 Added more validation to `setup.sh` (i.e. it is not possible to enter an invalid host anymore)
 
-Added ability to change the root path where service is running by setting `BITCART_SERVICE_ROOTPATH` (i.e. `BITCART_STORE_ROOTPATH`)
+Added ability to change the root path where service is running by setting `RDWV_SERVICE_ROOTPATH` (i.e. `RDWV_STORE_ROOTPATH`)
 
 Added new settings to configure nginx reverse proxy:
 
@@ -1233,9 +1233,9 @@ Overall generator refactor
 
 Existing deployments will be unaffected.
 
-If reverse proxy is enabled and `BITCART_ADMIN_HOST` and `BITCART_STORE_HOST` and `BITCART_ADMIN_API_URL` and `BITCART_STORE_API_URL` are all unset, one domain mode is enabled.
+If reverse proxy is enabled and `RDWV_ADMIN_HOST` and `RDWV_STORE_HOST` and `RDWV_ADMIN_API_URL` and `RDWV_STORE_API_URL` are all unset, one domain mode is enabled.
 
-For one domain mode, only one setting is used: `BITCART_HOST`.
+For one domain mode, only one setting is used: `RDWV_HOST`.
 
 It will determine the only domain rdwvcc will run on.
 
@@ -1243,7 +1243,7 @@ The 3 main services will run under different routes.
 
 There is a root service, running at domain root. The root service is selected in the following order (if available): store, admin, api
 
-By default, assuming `BITCART_HOST` was `rdwv.local`:
+By default, assuming `RDWV_HOST` was `rdwv.local`:
 
 - the store will run on `rdwv.local`
 - admin on `rdwv.local/admin`
@@ -1254,10 +1254,10 @@ Everything will be configured to work on one domain.
 To enable one domain mode for existing deployments:
 
 ```bash
-unset BITCART_ADMIN_HOST
-unset BITCART_STORE_HOST
-unset BITCART_ADMIN_URL
-unset BITCART_STORE_URL
+unset RDWV_ADMIN_HOST
+unset RDWV_STORE_HOST
+unset RDWV_ADMIN_URL
+unset RDWV_STORE_URL
 ./setup.sh
 ```
 
@@ -1265,10 +1265,10 @@ unset BITCART_STORE_URL
 
 The following environment variables were renamed to reduce confusion:
 
-- `BITCART_ADMIN_URL` -> `BITCART_ADMIN_API_URL`
-- `BITCART_STORE_URL` -> `BITCART_STORE_API_URL`
-- `BITCART_ADMIN_ONION_URL` -> `BITCART_ADMIN_API_ONION_URL`
-- `BITCART_STORE_ONION_URL` -> `BITCART_STORE_API_ONION_URL`
+- `RDWV_ADMIN_URL` -> `RDWV_ADMIN_API_URL`
+- `RDWV_STORE_URL` -> `RDWV_STORE_API_URL`
+- `RDWV_ADMIN_ONION_URL` -> `RDWV_ADMIN_API_ONION_URL`
+- `RDWV_STORE_ONION_URL` -> `RDWV_STORE_API_ONION_URL`
 
 Please set them in order for your deployment to work
 

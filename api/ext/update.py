@@ -51,7 +51,7 @@ async def collect_stats():
     plugins = [{"name": plugin["name"], "author": plugin["author"], "version": plugin["version"]} for plugin in get_plugins()]
     return {
         "version": VERSION,
-        "hostname": os.getenv("BITCART_HOST", ""),
+        "hostname": os.getenv("RDWV_HOST", ""),
         "plugins": plugins,
         "total_invoices": total_invoices,
         "complete_invoices": complete_invoices,

@@ -1212,11 +1212,11 @@ async def test_configurator(client: TestClient, token: str):
     script = resp.json()["output"]
     assert "sudo su -" in script
     assert f"git clone {DOCKER_REPO_URL} rdwv-docker" in script
-    assert "BITCART_CRYPTOS=btc" in script
-    assert "BITCART_HOST=rdwv.ai" in script
+    assert "RDWV_CRYPTOS=btc" in script
+    assert "RDWV_HOST=rdwv.ai" in script
     assert "BTC_NETWORK=testnet" in script
     assert "BTC_LIGHTNING=True" in script
-    assert "BITCART_ADDITIONAL_COMPONENTS=custom,tor" in script
+    assert "RDWV_ADDITIONAL_COMPONENTS=custom,tor" in script
     deploy_settings = static_data.SCRIPT_SETTINGS.copy()
     deploy_settings["mode"] = "Remote"
     resp = await client.post("/configurator/deploy", json=deploy_settings)

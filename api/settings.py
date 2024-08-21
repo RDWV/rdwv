@@ -65,27 +65,27 @@ class MySecretsSettingsSource(CustomDecodingMixin, SecretsSettingsSource):
 
 
 class Settings(BaseSettings):
-    enabled_cryptos: CommaSeparatedStrings = Field("btc", validation_alias="BITCART_CRYPTOS")
+    enabled_cryptos: CommaSeparatedStrings = Field("btc", validation_alias="RDWV_CRYPTOS")
     redis_host: str = Field("redis://localhost", validation_alias="REDIS_HOST")
     test: bool = Field("pytest" in sys.modules, validation_alias="TEST")
     functional_tests: bool = Field(False, validation_alias="FUNCTIONAL_TESTS")
     docker_env: bool = Field(False, validation_alias="IN_DOCKER")
-    root_path: str = Field("", validation_alias="BITCART_BACKEND_ROOTPATH")
+    root_path: str = Field("", validation_alias="RDWV_BACKEND_ROOTPATH")
     db_name: str = Field("rdwv", validation_alias="DB_DATABASE")
     db_user: str = Field("postgres", validation_alias="DB_USER")
     db_password: str = Field("", validation_alias="DB_PASSWORD")
     db_host: str = Field("127.0.0.1", validation_alias="DB_HOST")
     db_port: int = Field(5432, validation_alias="DB_PORT")
-    datadir: str = Field("data", validation_alias="BITCART_DATADIR")
-    backups_dir: str = Field("data/backups", validation_alias="BITCART_BACKUPS_DIR")
-    backend_plugins_dir: str = Field("modules", validation_alias="BITCART_BACKEND_PLUGINS_DIR")
-    admin_plugins_dir: str = Field("data/admin_plugins", validation_alias="BITCART_ADMIN_PLUGINS_DIR")
-    store_plugins_dir: str = Field("data/store_plugins", validation_alias="BITCART_STORE_PLUGINS_DIR")
-    docker_plugins_dir: str = Field("data/docker_plugins", validation_alias="BITCART_DOCKER_PLUGINS_DIR")
-    admin_host: str = Field("localhost:3000", validation_alias="BITCART_ADMIN_HOST")
-    admin_rootpath: str = Field("/", validation_alias="BITCART_ADMIN_ROOTPATH")
-    reverseproxy: str = Field("nginx-https", validation_alias="BITCART_REVERSEPROXY")
-    https_enabled: bool = Field(False, validation_alias="BITCART_HTTPS_ENABLED")
+    datadir: str = Field("data", validation_alias="RDWV_DATADIR")
+    backups_dir: str = Field("data/backups", validation_alias="RDWV_BACKUPS_DIR")
+    backend_plugins_dir: str = Field("modules", validation_alias="RDWV_BACKEND_PLUGINS_DIR")
+    admin_plugins_dir: str = Field("data/admin_plugins", validation_alias="RDWV_ADMIN_PLUGINS_DIR")
+    store_plugins_dir: str = Field("data/store_plugins", validation_alias="RDWV_STORE_PLUGINS_DIR")
+    docker_plugins_dir: str = Field("data/docker_plugins", validation_alias="RDWV_DOCKER_PLUGINS_DIR")
+    admin_host: str = Field("localhost:3000", validation_alias="RDWV_ADMIN_HOST")
+    admin_rootpath: str = Field("/", validation_alias="RDWV_ADMIN_ROOTPATH")
+    reverseproxy: str = Field("nginx-https", validation_alias="RDWV_REVERSEPROXY")
+    https_enabled: bool = Field(False, validation_alias="RDWV_HTTPS_ENABLED")
     log_file: Optional[str] = None
     log_file_name: Optional[str] = Field(None, validation_alias="LOG_FILE")
     log_file_regex: Optional[re.Pattern] = None
@@ -396,7 +396,7 @@ def log_startup_info():
     settings.logger.info(f"Rdwv version: {VERSION} - {WEBSITE} - {GIT_REPO_URL}")
     settings.logger.info(f"Python version: {sys.version}. On platform: {platform.platform()}")
     settings.logger.info(
-        f"BITCART_CRYPTOS={','.join([item for item in settings.enabled_cryptos])}; IN_DOCKER={settings.docker_env}; "
+        f"RDWV_CRYPTOS={','.join([item for item in settings.enabled_cryptos])}; IN_DOCKER={settings.docker_env}; "
         f"LOG_FILE={settings.log_file_name}"
     )
     settings.logger.info(f"Successfully loaded {len(settings.cryptos)} cryptos")

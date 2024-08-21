@@ -74,7 +74,7 @@ class ServerEnv:  # pragma: no cover: no valid SSH configuration in CI environme
 
     def preload_env(self):
         self.env = self._read_remote_file("/etc/profile.d/rdwv-env.sh")
-        env_file = self.get("BITCART_ENV_FILE", "")
+        env_file = self.get("RDWV_ENV_FILE", "")
         if env_file:
             self.env.update(self._read_remote_file(env_file, require_export=False))
 
@@ -98,18 +98,18 @@ def collect_server_settings(ssh_settings):  # pragma: no cover
     try:
         client = ssh_settings.create_ssh_client()
         env = ServerEnv(client)
-        cryptos = CommaSeparatedStrings(env.get("BITCART_CRYPTOS", "btc"))
+        cryptos = CommaSeparatedStrings(env.get("RDWV_CRYPTOS", "btc"))
         for crypto in cryptos:
             symbol = crypto.upper()
             network = env.get(f"{symbol}_NETWORK", "mainnet")
             lightning = str_to_bool(env.get(f"{symbol}_LIGHTNING", "false"))
             settings.coins[crypto] = ConfiguratorCoinDescription(network=network, lightning=lightning)
-        domain = env.get("BITCART_HOST", "")
-        reverse_proxy = env.get("BITCART_REVERSEPROXY", "nginx-https")
+        domain = env.get("RDWV_HOST", "")
+        reverse_proxy = env.get("RDWV_REVERSEPROXY", "nginx-https")
         is_https = reverse_proxy in constants.HTTPS_REVERSE_PROXIES
         settings.domain_settings = ConfiguratorDomainSettings(domain=domain, https=is_https)
-        installation_pack = env.get("BITCART_INSTALL", "all")
-        additional_components = list(CommaSeparatedStrings(env.get("BITCART_ADDITIONAL_COMPONENTS", "")))
+        installation_pack = env.get("RDWV_INSTALL", "all")
+        additional_components = list(CommaSeparatedStrings(env.get("RDWV_ADDITIONAL_COMPONENTS", "")))
         settings.advanced_settings = ConfiguratorAdvancedSettings(
             installation_pack=installation_pack, additional_components=additional_components
         )
