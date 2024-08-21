@@ -4,7 +4,7 @@ import json
 from typing import TYPE_CHECKING
 
 import pytest
-from bitcart.errors import BaseError as BitcartBaseError
+from rdwv.errors import BaseError as RdwvBaseError
 from parametrization import Parametrization
 
 from api import schemes
@@ -178,10 +178,10 @@ class MockBTC:
     coin_name = "BTC"
 
     async def list_fiat(self):
-        raise BitcartBaseError("Doesn't work")
+        raise RdwvBaseError("Doesn't work")
 
     async def validate_key(self, key):
-        raise BitcartBaseError("Broken")
+        raise RdwvBaseError("Broken")
 
 
 async def test_edge_fiatlist_cases(client: TestClient, token, mocker):
@@ -196,7 +196,7 @@ async def test_edge_fiatlist_cases(client: TestClient, token, mocker):
 
 
 async def test_edge_invoice_cases(client: TestClient, token, store, mocker, caplog):
-    mocker.patch("api.crud.invoices.create_payment_method", side_effect=BitcartBaseError("Doesn't work"))
+    mocker.patch("api.crud.invoices.create_payment_method", side_effect=RdwvBaseError("Doesn't work"))
     resp = await client.post(
         "/invoices", json={"price": 5, "store_id": store["id"]}, headers={"Authorization": f"Bearer {token}"}
     )

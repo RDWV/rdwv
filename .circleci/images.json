@@ -1,5 +1,5 @@
 {
-    "bitcart": {
+    "rdwv": {
         "dockerfile": "backend.Dockerfile",
         "files": [
             "api/*",
@@ -13,7 +13,7 @@
             "requirements.txt"
         ]
     },
-    "bitcart-btc": {
+    "rdwv-btc": {
         "dockerfile": "btc.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -22,7 +22,7 @@
             "requirements/daemons/btc.txt"
         ]
     },
-    "bitcart-bch": {
+    "rdwv-bch": {
         "dockerfile": "bch.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -33,7 +33,7 @@
         "bases": "bch",
         "name": "electron-cash"
     },
-    "bitcart-xmr": {
+    "rdwv-xmr": {
         "dockerfile": "xmr.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -43,7 +43,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-eth": {
+    "rdwv-eth": {
         "dockerfile": "eth.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -53,7 +53,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-bnb": {
+    "rdwv-bnb": {
         "dockerfile": "bnb.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -63,7 +63,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-sbch": {
+    "rdwv-sbch": {
         "dockerfile": "sbch.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -73,7 +73,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-matic": {
+    "rdwv-matic": {
         "dockerfile": "matic.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -83,7 +83,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-trx": {
+    "rdwv-trx": {
         "dockerfile": "trx.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -93,7 +93,7 @@
         ],
         "bases": "eth"
     },
-    "bitcart-xrg": {
+    "rdwv-xrg": {
         "dockerfile": "xrg.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -104,7 +104,7 @@
         "bases": "bch",
         "name": "oregano"
     },
-    "bitcart-ltc": {
+    "rdwv-ltc": {
         "dockerfile": "ltc.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -113,7 +113,7 @@
             "requirements/daemons/ltc.txt"
         ]
     },
-    "bitcart-bsty": {
+    "rdwv-bsty": {
         "dockerfile": "bsty.Dockerfile",
         "files": [
             "daemons/base.py",
@@ -122,7 +122,7 @@
             "requirements/daemons/bsty.txt"
         ]
     },
-    "bitcart-grs": {
+    "rdwv-grs": {
         "dockerfile": "grs.Dockerfile",
         "files": [
             "daemons/base.py",

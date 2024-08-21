@@ -722,11 +722,11 @@ class BlockProcessorDaemon(BaseDaemon, metaclass=ABCMeta):
 
     def user_dir(self):
         if os.name == "posix":
-            return os.path.join(os.environ["HOME"], f".bitcart-{self.name.lower()}")
+            return os.path.join(os.environ["HOME"], f".rdwv-{self.name.lower()}")
         elif "APPDATA" in os.environ:
-            return os.path.join(os.environ["APPDATA"], f"Bitcart-{self.name.upper()}")
+            return os.path.join(os.environ["APPDATA"], f"Rdwv-{self.name.upper()}")
         elif "LOCALAPPDATA" in os.environ:
-            return os.path.join(os.environ["LOCALAPPDATA"], f"Bitcart-{self.name.upper()}")
+            return os.path.join(os.environ["LOCALAPPDATA"], f"Rdwv-{self.name.upper()}")
 
     def get_datadir(self):
         base_dir = self.DATA_PATH or self.user_dir()

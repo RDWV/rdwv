@@ -5,7 +5,7 @@ from collections import defaultdict
 from decimal import Decimal
 from operator import attrgetter
 
-from bitcart.errors import errors
+from rdwv.errors import errors
 from fastapi import HTTPException
 from sqlalchemy import select, text
 from starlette.datastructures import CommaSeparatedStrings

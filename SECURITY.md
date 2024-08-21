@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-To report security issues send an email to bitcartservices@gmail.com.
+To report security issues send an email to rdwvservices@gmail.com.
 
 The following keys may be used to communicate sensitive information to developers:
 

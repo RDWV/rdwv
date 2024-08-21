@@ -110,4 +110,4 @@ def deleting_file_base(filename):
 
 @pytest.fixture
 def log_file():
-    yield from deleting_file_base("tests/fixtures/logs/bitcart20210821.log")
+    yield from deleting_file_base("tests/fixtures/logs/rdwv20210821.log")

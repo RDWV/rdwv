@@ -5,14 +5,14 @@ from base64 import b64encode
 from aiohttp import ClientSession
 
 from api import invoices, models, utils
-from api.exceptions import BitcartError
+from api.exceptions import RdwvError
 from api.ext.moneyformat import currency_table
 
 SHOPIFY_ORDER_PREFIX = "shopify-"
-SHOPIFY_KEYWORDS = ["bitcoin", "btc", "bitcartcc", "bitcart"]
+SHOPIFY_KEYWORDS = ["bitcoin", "btc", "rdwvcc", "rdwv"]
 
 
-class ShopifyAPIError(BitcartError):
+class ShopifyAPIError(RdwvError):
     """Error accessing shopify API"""
 
 
@@ -117,7 +117,7 @@ async def update_shopify_status(client, order_id, invoice_id, currency, amount, 
                 "currency": currency,
                 "amount": currency_table.format_decimal(currency, amount),
                 "kind": kind,
-                "gateway": "Bitcart",
+                "gateway": "Rdwv",
                 "source": "external",
                 "authorization": invoice_id,
                 "status": status,

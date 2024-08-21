@@ -6,8 +6,8 @@ from decimal import Decimal
 import async_timeout
 import pytest
 from aiohttp import web
-from bitcart import BTC
-from bitcart.utils import bitcoins
+from rdwv import BTC
+from rdwv.utils import bitcoins
 
 from api.constants import MAX_CONFIRMATION_WATCH
 from api.ext.moneyformat import truncate

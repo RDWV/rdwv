@@ -1,7 +1,7 @@
 import asyncio
 from decimal import Decimal
 
-from bitcart import errors
+from rdwv import errors
 from sqlalchemy import or_, select
 
 from api import constants, crud, events, models, settings, utils

@@ -3,7 +3,7 @@ import time
 from abc import ABCMeta, abstractmethod
 from decimal import Decimal
 
-from bitcart.coin import Coin
+from rdwv.coin import Coin
 
 from api.ext.fxrate import ExchangePair
 from api.logger import get_exception_message, get_logger

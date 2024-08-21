@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  bitcart: bitcart/bitcart-shared@2
+  rdwv: rdwv/rdwv-shared@2
 
 executors:
   main-executor:
@@ -14,7 +14,7 @@ executors:
       - image: circleci/redis:alpine
       - image: circleci/postgres:12-alpine-ram
         environment:
-          POSTGRES_DB: bitcart_test
+          POSTGRES_DB: rdwv_test
           POSTGRES_HOST_AUTH_METHOD: trust
     environment:
       TEST_ARGS: "-o junit_family=xunit1 --junitxml test-results/pytest/coverage.xml --cov-report html:coverage"
@@ -83,21 +83,21 @@ commands:
       - store_artifacts:
           path: test-results
 
-  setup-bitcart-docker:
+  setup-rdwv-docker:
     steps:
       - run:
-          name: Prepare bitcart-docker
+          name: Prepare rdwv-docker
           command: |
-            git clone https://github.com/bitcart/bitcart-docker
-            cd bitcart-docker
+            git clone https://github.com/rdwv/rdwv-docker
+            cd rdwv-docker
             ./dev-setup.sh $CIRCLE_BRANCH
 
-  build-bitcart-images:
+  build-rdwv-images:
     steps:
       - checkout
-      - setup-bitcart-docker
-      - bitcart/login-to-registries
-      - bitcart/enable-buildx
+      - setup-rdwv-docker
+      - rdwv/login-to-registries
+      - rdwv/enable-buildx
       - run:
           name: Publish docker images
           command: |
@@ -145,12 +145,12 @@ jobs:
             TEST_FILES=$(find -name "test_*.py" -not -name "test_functional.py" | sed 's/.\///' | circleci tests split --split-by=timings)
             pytest -n 2 $TEST_ARGS $TEST_FILES
 
-      - bitcart/codecov
+      - rdwv/codecov
 
       - upload-results
 
   deploy-amd64:
-    executor: bitcart/build-ubuntu
+    executor: rdwv/build-ubuntu
 
     working_directory: ~/repo
 
@@ -158,10 +158,10 @@ jobs:
       ARCH: amd64
 
     steps:
-      - build-bitcart-images
+      - build-rdwv-images
 
   deploy-arm:
-    executor: bitcart/build-ubuntu-arm
+    executor: rdwv/build-ubuntu-arm
 
     working_directory: ~/repo
 
@@ -169,10 +169,10 @@ jobs:
       ARCH: arm
 
     steps:
-      - build-bitcart-images
+      - build-rdwv-images
 
   deploy:
-    executor: bitcart/build-ubuntu
+    executor: rdwv/build-ubuntu
 
     working_directory: ~/repo
 
@@ -180,13 +180,13 @@ jobs:
       MANIFEST: true
 
     steps:
-      - build-bitcart-images
+      - build-rdwv-images
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - bitcart/lint:
+      - rdwv/lint:
           name: lint
           pre-steps:
             - install-lint-dependencies
@@ -202,7 +202,7 @@ workflows:
                 - "3.9"
                 - "3.10"
                 - "3.11"
-      - bitcart/functional-tests:
+      - rdwv/functional-tests:
           name: functional-tests
           executor: main-executor
           dependency-steps:

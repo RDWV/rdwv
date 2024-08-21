@@ -2,8 +2,8 @@ import math
 from decimal import Decimal
 from typing import Union
 
-from bitcart import BTC
-from bitcart.errors import BaseError as BitcartBaseError
+from rdwv import BTC
+from rdwv.errors import BaseError as RdwvBaseError
 from fastapi import HTTPException
 
 from api import models, settings, utils
@@ -34,7 +34,7 @@ async def get_rate(wallet, currency, coin=None, extra_fallback=True, *, store=No
         if math.isnan(rate) and extra_fallback:
             rate = Decimal(1)  # no rate available, no conversion
         rate = await apply_filters("get_rate", rate, coin, currency)
-    except (BitcartBaseError, HTTPException) as e:
+    except (RdwvBaseError, HTTPException) as e:
         logger.error(
             f"Error fetching rates of coin {wallet.currency.upper()} for currency {currency}, falling back to 1:\n"
             f"{get_exception_message(e)}"

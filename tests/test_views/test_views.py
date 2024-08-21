@@ -10,8 +10,8 @@ from typing import TYPE_CHECKING
 
 import pyotp
 import pytest
-from bitcart import BTC, LTC
-from bitcart.errors import BaseError as BitcartBaseError
+from rdwv import BTC, LTC
+from rdwv.errors import BaseError as RdwvBaseError
 from parametrization import Parametrization
 
 from api import invoices, models, schemes, settings, utils
@@ -660,12 +660,12 @@ async def test_export_invoices(client: TestClient, token: str, limited_user):
     assert json_resp.status_code == 200
     assert isinstance(json_resp.json(), list)
     assert len(json_resp.json()) == 0
-    assert "bitcart-export" in json_resp.headers["content-disposition"]
+    assert "rdwv-export" in json_resp.headers["content-disposition"]
     resp2 = await client.get("/invoices/export?export_format=json", headers={"Authorization": f"Bearer {token}"})
     assert resp2.json() == json_resp.json()
     csv_resp = await client.get("/invoices/export?export_format=csv", headers={"Authorization": f"Bearer {token}"})
     assert csv_resp.status_code == 200
-    assert "bitcart-export" in csv_resp.headers["content-disposition"]
+    assert "rdwv-export" in csv_resp.headers["content-disposition"]
     assert csv_resp.text.endswith("\r\n")
     json_resp = await client.get("/invoices/export?all_users=true", headers={"Authorization": f"Bearer {token}"})
     data = json_resp.json()
@@ -1004,8 +1004,8 @@ async def test_logs_list(client: TestClient, token: str):
     assert resp.json() == []
     with enabled_logs():
         assert (await client.get("/manage/logs", headers={"Authorization": f"Bearer {token}"})).json() == [
-            "bitcart.log",
-            "bitcart20210821.log",
+            "rdwv.log",
+            "rdwv20210821.log",
         ]
 
 
@@ -1014,7 +1014,7 @@ async def test_logs_get(client: TestClient, token: str):
     assert (await client.get("/manage/logs/1", headers={"Authorization": f"Bearer {token}"})).status_code == 400
     with enabled_logs():
         assert (await client.get("/manage/logs/1", headers={"Authorization": f"Bearer {token}"})).status_code == 404
-        resp = await client.get("/manage/logs/bitcart.log", headers={"Authorization": f"Bearer {token}"})
+        resp = await client.get("/manage/logs/rdwv.log", headers={"Authorization": f"Bearer {token}"})
         assert resp.status_code == 200
         assert resp.json() == "Test"
 
@@ -1031,7 +1031,7 @@ async def test_logs_delete(client: TestClient, log_file: str, token: str):
     with enabled_logs():
         assert (await client.delete("/manage/logs/1", headers={"Authorization": f"Bearer {token}"})).status_code == 404
         assert (
-            await client.delete("/manage/logs/bitcart.log", headers={"Authorization": f"Bearer {token}"})
+            await client.delete("/manage/logs/rdwv.log", headers={"Authorization": f"Bearer {token}"})
         ).status_code == 403
         resp = await client.delete(f"/manage/logs/{log_name}", headers={"Authorization": f"Bearer {token}"})
         assert resp.status_code == 200
@@ -1211,9 +1211,9 @@ async def test_configurator(client: TestClient, token: str):
     assert resp.json()["success"]
     script = resp.json()["output"]
     assert "sudo su -" in script
-    assert f"git clone {DOCKER_REPO_URL} bitcart-docker" in script
+    assert f"git clone {DOCKER_REPO_URL} rdwv-docker" in script
     assert "BITCART_CRYPTOS=btc" in script
-    assert "BITCART_HOST=bitcart.ai" in script
+    assert "BITCART_HOST=rdwv.ai" in script
     assert "BTC_NETWORK=testnet" in script
     assert "BTC_LIGHTNING=True" in script
     assert "BITCART_ADDITIONAL_COMPONENTS=custom,tor" in script
@@ -1442,7 +1442,7 @@ class NotRunningBTC:
     class server:
         @staticmethod
         def getinfo():
-            raise BitcartBaseError("Not running")
+            raise RdwvBaseError("Not running")
 
 
 async def test_syncinfo(client: TestClient, token, mocker):

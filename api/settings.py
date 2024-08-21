@@ -13,8 +13,8 @@ from typing import Any, Optional
 
 import fido2.features
 from aiohttp import ClientSession
-from bitcart import COINS, APIManager
-from bitcart.coin import Coin
+from rdwv import COINS, APIManager
+from rdwv.coin import Coin
 from fastapi import HTTPException
 from pydantic import Field, ValidationInfo, field_validator
 from pydantic.fields import FieldInfo
@@ -71,7 +71,7 @@ class Settings(BaseSettings):
     functional_tests: bool = Field(False, validation_alias="FUNCTIONAL_TESTS")
     docker_env: bool = Field(False, validation_alias="IN_DOCKER")
     root_path: str = Field("", validation_alias="BITCART_BACKEND_ROOTPATH")
-    db_name: str = Field("bitcart", validation_alias="DB_DATABASE")
+    db_name: str = Field("rdwv", validation_alias="DB_DATABASE")
     db_user: str = Field("postgres", validation_alias="DB_USER")
     db_password: str = Field("", validation_alias="DB_PASSWORD")
     db_host: str = Field("127.0.0.1", validation_alias="DB_HOST")
@@ -93,7 +93,7 @@ class Settings(BaseSettings):
     update_url: Optional[str] = Field(None, validation_alias="UPDATE_URL")
     torrc_file: Optional[str] = Field(None, validation_alias="TORRC_FILE")
     openapi_path: Optional[str] = Field(None, validation_alias="OPENAPI_PATH")
-    api_title: str = Field("Bitcart", validation_alias="API_TITLE")
+    api_title: str = Field("Rdwv", validation_alias="API_TITLE")
     cryptos: Optional[dict[str, Coin]] = None
     crypto_settings: Optional[dict] = None
     manager: Optional[APIManager] = None
@@ -187,7 +187,7 @@ class Settings(BaseSettings):
     @classmethod
     def set_db_name(cls, db, info: ValidationInfo):
         if info.data["test"]:
-            return "bitcart_test"
+            return "rdwv_test"
         return db
 
     @field_validator("datadir", mode="before")
@@ -393,7 +393,7 @@ def handle_exception(settings, loop, context):
 
 def log_startup_info():
     settings = settings_ctx.get()
-    settings.logger.info(f"Bitcart version: {VERSION} - {WEBSITE} - {GIT_REPO_URL}")
+    settings.logger.info(f"Rdwv version: {VERSION} - {WEBSITE} - {GIT_REPO_URL}")
     settings.logger.info(f"Python version: {sys.version}. On platform: {platform.platform()}")
     settings.logger.info(
         f"BITCART_CRYPTOS={','.join([item for item in settings.enabled_cryptos])}; IN_DOCKER={settings.docker_env}; "

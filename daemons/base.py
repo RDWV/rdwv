@@ -16,11 +16,11 @@ os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = (
 
 
 class BaseDaemon:
-    # Coin name (symbol), used for coin identification across Bitcart
+    # Coin name (symbol), used for coin identification across Rdwv
     name: str
     # Base spec to use, must define jsonrpc codes and their error messages, all coins inherited use it
     BASE_SPEC_FILE: str
-    # default port, must differ between daemons, in range 500X, assigned in order of coins addition to Bitcart
+    # default port, must differ between daemons, in range 500X, assigned in order of coins addition to Rdwv
     DEFAULT_PORT: int
     # command aliases
     ALIASES: dict = {}

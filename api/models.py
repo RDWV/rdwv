@@ -4,8 +4,8 @@ import sys
 from datetime import timedelta
 
 import pyotp
-from bitcart import COINS
-from bitcart.errors import BaseError as BitcartBaseError
+from rdwv import COINS
+from rdwv.errors import BaseError as RdwvBaseError
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from gino.crud import UpdateRequest
@@ -212,7 +212,7 @@ class User(BaseModel):
         if not self.totp_key:  # pragma: no cover # TODO: remove a few releases later
             self.totp_key = pyotp.random_base32()
             await self.update(totp_key=self.totp_key).apply()
-        self.totp_url = pyotp.TOTP(self.totp_key).provisioning_uri(self.email, issuer_name="Bitcart")
+        self.totp_url = pyotp.TOTP(self.totp_key).provisioning_uri(self.email, issuer_name="Rdwv")
 
     @classmethod
     def prepare_create(cls, kwargs):
@@ -291,7 +291,7 @@ class Wallet(BaseModel):
                     if not await coin.server.validatecontract(kwargs["contract"]):
                         raise HTTPException(422, "Invalid contract")
                     kwargs["contract"] = await coin.server.normalizeaddress(kwargs["contract"])
-                except BitcartBaseError as e:
+                except RdwvBaseError as e:
                     logger.error(f"Failed to validate contract for currency {currency}:\n{get_exception_message(e)}")
                     raise HTTPException(422, "Invalid contract")
 
@@ -299,7 +299,7 @@ class Wallet(BaseModel):
         try:
             if not await coin.validate_key(xpub, **additional_xpub_data):
                 raise HTTPException(422, "Wallet key invalid")
-        except BitcartBaseError as e:
+        except RdwvBaseError as e:
             logger.error(f"Failed to validate xpub for currency {currency}:\n{get_exception_message(e)}")
             raise HTTPException(422, "Wallet key invalid")
 

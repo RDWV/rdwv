@@ -782,7 +782,7 @@ class ConfiguratorCoinDescription(DisplayModel):
 
 class ConfiguratorAdvancedSettings(DisplayModel):
     installation_pack: Optional[str] = "all"
-    bitcart_docker_repository: Optional[str] = ""
+    rdwv_docker_repository: Optional[str] = ""
     additional_components: Optional[list[str]] = []
 
 

@@ -10,9 +10,9 @@
 __pycache__/
 backup/
 backups/
-bitcart-cli
-bitcart-cli-*
-bitcart-docker
+rdwv-cli
+rdwv-cli-*
+rdwv-docker
 env/
 htmlcov/
 modules/*

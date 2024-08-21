@@ -2,7 +2,7 @@
 aiofiles
 alembic
 apprise
-bitcart
+rdwv
 email-validator
 fastapi
 fido2

@@ -89,7 +89,7 @@ aiohttp==3.10.3 \
     --hash=sha256:f25d6c4e82d7489be84f2b1c8212fafc021b3731abdb61a563c90e37cced3a21 \
     --hash=sha256:f817a54059a4cfbc385a7f51696359c642088710e731e8df80d0607193ed2b73 \
     --hash=sha256:fda91ad797e4914cca0afa8b6cccd5d2b3569ccc88731be202f6adce39503189
-    # via bitcart
+    # via rdwv
 aiosignal==1.3.1 \
     --hash=sha256:54cd96e15e1649b75d6c87526a6ff0b6c1b0dd3459f43d9ca11d48c339b68cfc \
     --hash=sha256:f8376fb07dd1e86a584e4fcdec80b36b7f81aac666ebc724e2c090300dd83b17
@@ -200,7 +200,7 @@ bcrypt==4.1.2 \
     # via
     #   paramiko
     #   pwdlib
-bitcart==1.15.0.0 \
+rdwv==1.15.0.0 \
     --hash=sha256:51ad4fcf607015aaf2a4cdf648059f80102fc81feff8c8af1eb8edeedf1ed1d5 \
     --hash=sha256:7ea215d24970c1730903750eda141d532bd80a632996e0d3dca4441130816fc9
     # via -r requirements/web.txt
@@ -671,7 +671,7 @@ jinja2==3.1.4 \
     # via -r requirements/web.txt
 jsonrpcclient==4.0.3 \
     --hash=sha256:3cbb9e27e1be29821becf135ea183144a836215422727e1ffe5056a49a670f0d
-    # via bitcart
+    # via rdwv
 jsonschema==4.23.0 \
     --hash=sha256:d71497fef26351a33265337fa77ffeb82423f3ea21283cd9467bb03999266bc4 \
     --hash=sha256:fbadb6f8b144a8f8cf9f0b89ba94501d143e50411a1278633f56a7acf7fd5566
@@ -1383,7 +1383,7 @@ typing-extensions==4.12.2 \
 universalasync==0.3.1.2 \
     --hash=sha256:5324996827402e1b509ca200b324615cb0b50f1f82f11afaf538533355a34d45 \
     --hash=sha256:72271f3b35bc3bd6e72cab125d2cf19f178386c66d3c47e39bc2ddc4de974f6c
-    # via bitcart
+    # via rdwv
 urllib3==2.2.2 \
     --hash=sha256:a448b2f64d686155468037e1ace9f2d2199776e17f0a46610480d311f73e3472 \
     --hash=sha256:dd505485549a7a552833da5e6063639d0d177c04f23bc3864e41e5dc5f612168

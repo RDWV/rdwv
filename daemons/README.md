@@ -1,6 +1,6 @@
-# Bitcart (Core) Daemons
+# Rdwv (Core) Daemons
 
-This directory contains source code for Bitcart core part: daemons.
+This directory contains source code for Rdwv core part: daemons.
 
 All daemons inherit from others, building a dependency graph.
 
@@ -55,7 +55,7 @@ It would import the `customelectrum` module only on startup
 
 ### BTC daemon
 
-`BTCDaemon` is an implementation of Bitcart daemon using electrum wallet for it's operations. Read `btc.py` source code to check what you need to override in your subclass.
+`BTCDaemon` is an implementation of Rdwv daemon using electrum wallet for it's operations. Read `btc.py` source code to check what you need to override in your subclass.
 
 ```python
 class CustomDaemon(BTCDaemon):

@@ -3,7 +3,7 @@ import os
 from typing import Optional
 
 import aiofiles
-from bitcart.errors import BaseError as BitcartBaseError
+from rdwv.errors import BaseError as RdwvBaseError
 from fastapi import APIRouter, File, HTTPException, Security, UploadFile
 from fastapi.responses import FileResponse
 
@@ -215,7 +215,7 @@ async def restore_backup(
         await run_hook("restore_backup", path)
         return utils.host.run_host_output(
             '. helpers.sh; load_env; ./restore.sh --delete-backup "/var/lib/docker/volumes/$(volume_name'
-            ' bitcart_datadir)/_data/backup.tar.gz" ',
+            ' rdwv_datadir)/_data/backup.tar.gz" ',
             "Successfully started restore process!",
         )
     return {"status": "error", "message": "Not running in docker"}
@@ -225,7 +225,7 @@ async def fetch_currency_info(coin):
     info = {"running": True, "currency": settings.settings.cryptos[coin].coin_name}
     try:
         info.update(await settings.settings.cryptos[coin].server.getinfo())
-    except BitcartBaseError:
+    except RdwvBaseError:
         info["running"] = False
     return info
 

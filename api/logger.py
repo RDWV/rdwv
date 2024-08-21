@@ -18,7 +18,7 @@ def get_exception_message(exc: Exception):
 
 def timed_log_namer(default_name):
     base_filename, *ext, date = default_name.split(".")
-    return f"{base_filename}{date}.{'.'.join(ext)}"  # i.e. "bitcart12345678.log"
+    return f"{base_filename}{date}.{'.'.join(ext)}"  # i.e. "rdwv12345678.log"
 
 
 def configure_file_logging():
@@ -53,7 +53,7 @@ def configure_logserver(logserver_client_host):
     socket_handler = MsgpackHandler(logserver_client_host, LOGSERVER_PORT)
     socket_handler.setLevel(logging.DEBUG)
     logger_client.addHandler(socket_handler)
-    bitcart_logger.addHandler(socket_handler)
+    rdwv_logger.addHandler(socket_handler)
 
 
 formatter = logging.Formatter(
@@ -70,9 +70,9 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(console)
 
 logger_client = logging.getLogger("api.logclient")
-bitcart_logger = logging.getLogger("bitcart")
+rdwv_logger = logging.getLogger("rdwv")
 logger_client.setLevel(logging.DEBUG)
-bitcart_logger.setLevel(logging.DEBUG)
+rdwv_logger.setLevel(logging.DEBUG)
 
 
 def get_logger_server(name):

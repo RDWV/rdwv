@@ -16,7 +16,7 @@ POLICY_USER = {
 }
 SCRIPT_SETTINGS = {
     "mode": "Manual",
-    "domain_settings": {"domain": "bitcart.ai", "https": True},
+    "domain_settings": {"domain": "rdwv.ai", "https": True},
     "coins": {"btc": {"network": "testnet", "lightning": True}},
     "additional_services": ["tor"],
     "advanced_settings": {"additional_components": ["custom"]},
@@ -27,7 +27,7 @@ FALLBACK_SERVER_SETTINGS = {
     "additional_services": [],
     "advanced_settings": {
         "installation_pack": "all",
-        "bitcart_docker_repository": "",
+        "rdwv_docker_repository": "",
         "additional_components": [],
     },
 }

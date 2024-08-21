@@ -5,7 +5,7 @@ preview = true
 [tool.isort]
 profile = "black"
 line_length = 127
-known_third_party = ["bitcart"]
+known_third_party = ["rdwv"]
 
 [tool.pytest.ini_options]
 addopts = ["-n", "auto", "--cov=.", "--cov-report", "term-missing"]

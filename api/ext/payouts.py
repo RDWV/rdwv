@@ -1,7 +1,7 @@
 import asyncio
 from decimal import Decimal
 
-import bitcart
+import rdwv
 from sqlalchemy import select
 
 from api import invoices, models, settings, utils
@@ -164,7 +164,7 @@ async def process_new_block(currency):
             )
             try:
                 confirmations = (await coin.get_tx(payout.tx_hash))["confirmations"]
-            except bitcart.errors.TxNotFoundError:
+            except rdwv.errors.TxNotFoundError:
                 continue
             if confirmations >= 1:
                 coros.append(finalize_payout(coin, payout))

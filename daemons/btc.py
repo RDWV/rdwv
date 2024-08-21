@@ -36,7 +36,7 @@ class BTCDaemon(BaseDaemon):
     LIGHTNING_SUPPORTED = True
     # whether client is using asyncio or is synchronous
     ASYNC_CLIENT = True
-    # map electrum events to bitcart's own events
+    # map electrum events to rdwv's own events
     # we will only subscribe to the event keys specified
     EVENT_MAPPING = {
         "blockchain_updated": "new_block",
@@ -642,7 +642,7 @@ class BTCDaemon(BaseDaemon):
                     command_parser._action_groups[1]._group_actions,
                 )
             )
-            command_parser.prog = f"bitcart-cli {func}"
+            command_parser.prog = f"rdwv-cli {func}"
             return command_parser.format_help()
         else:
             raise Exception("Procedure not found")

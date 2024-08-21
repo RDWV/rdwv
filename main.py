@@ -56,7 +56,7 @@ def get_app():
         redoc_url="/",
         docs_url="/swagger",
         root_path=settings.root_path,
-        description="Bitcart Merchants API",
+        description="RedWaves Merchants API",
         lifespan=lifespan,
     )
     app.settings = settings
